@@ -1,3 +1,14 @@
+function getTime(time){
+    const hour = parseInt(time /3600);
+    let remainingSecond = time % 3600;
+    let minute = parseInt(remainingSecond / 60);
+    remainingSecond =parseInt(remainingSecond%60)
+    return `${hour} hour ${minute} minute ago`
+    
+}
+console.log(getTime(4326));
+
+
 /**
  * 1.Fetch ,Load and Show Categories
  */
@@ -52,8 +63,8 @@ const displayVideos = (videos) => {
     <img
       src=${video.thumbnail} 
       class = "h-full w-full object-cover"/>
-
-      <span class="absolute right-2 bottom-2 text-white bg-black rounded p-1">${video.others.posted_date}</span>
+      ${video.others.posted_date?.length == 0? "" : `<span class="absolute right-2 bottom-2 text-white bg-black rounded p-1">${getTime(video.others.posted_date)}</span>`}
+      
   </figure>
   <div class="px-0 py-2 flex gap-2">
    <div>
