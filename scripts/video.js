@@ -53,6 +53,30 @@ const loadCategoryVideos = (id) => {
     })
     .catch((error) => console.log(error));
 };
+
+const loadDetails = async (videoId) =>{
+console.log(videoId);
+const uri = `https://openapi.programming-hero.com/api/phero-tube/video/${videoId}`
+const res = await fetch(uri)
+const data = await res.json()
+displayDetails(data.video)
+
+}
+
+const displayDetails = (video) =>{
+console.log(video);
+const detailContainer = document.getElementById("modal-content");
+detailContainer.innerHTML =`
+<img src= ${video.thumbnail}/>
+<p>${video.description}
+`;
+
+// document.getElementById("showModalData").click();
+
+document.getElementById("customModal").showModal();
+
+}
+
 //DIsplay Videos
 const displayVideos = (videos) => {
   const videoContainer = document.getElementById("videos");
@@ -105,6 +129,7 @@ const displayVideos = (videos) => {
      : ""
  }
   </div>
+  <p><button onclick="loadDetails('${video.video_id}')" class= "btn btn-sm btn-error">Details</button></P>
   <div class='flex'>
   <p>${video.others.views} </p>
   <p>views</p>
